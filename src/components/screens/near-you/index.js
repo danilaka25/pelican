@@ -7,10 +7,12 @@ import { connect } from 'react-redux';
 import { Creators as NearbyRestaurantsActions } from '~/store/ducks/nearby-restaurants';
 
 import { getItemFromStorage } from '~/utils/AsyncStoarageManager';
-import dishesTypesItems from './dishesTypesItems';
+
 import CONSTANTS from '~/utils/CONSTANTS';
 
 import NearYouComponent from './components/NearYou';
+
+import restaurantsList from '../../../json-models/restaurants.json';
 
 type Props = {
   requestNearbyRestaurants: Function,
@@ -66,9 +68,7 @@ class NearYouContainer extends Component<Props, State> {
     const { indexDishesTypeSelected, userLocation } = this.state;
     const { requestNearbyRestaurants } = this.props;
 
-    const dishSelected = dishesTypesItems[indexDishesTypeSelected].id;
-
-    requestNearbyRestaurants(dishSelected, userLocation);
+    requestNearbyRestaurants(userLocation);
   };
 
   onDishesTypeChange = (indexDishesTypeSelected: number): void => {
@@ -184,9 +184,8 @@ class NearYouContainer extends Component<Props, State> {
         onDishesTypeChange={this.onDishesTypeChange}
         hasSomeData={restaurantsCached.length > 0}
         onSelectMarker={this.onSelectMarker}
-        dishesTypesItems={dishesTypesItems}
         userLocation={userLocation}
-        restaurants={restaurants}
+        restaurants={restaurantsList}
         error={error}
       />
     );

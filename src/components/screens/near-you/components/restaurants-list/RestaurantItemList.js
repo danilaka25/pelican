@@ -201,7 +201,6 @@ const RestaurantItemList = ({
       }}
     >
       <Fragment>
-        {renderTopRowContent(stars, distance)}
         <RestaurantDescriptionWrapper>
           <RestaurantDescriptionText>{description}</RestaurantDescriptionText>
         </RestaurantDescriptionWrapper>

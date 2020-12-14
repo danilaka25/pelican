@@ -22,6 +22,8 @@ import PopularSection from './components/popular/home-section';
 import Section from './components/Section';
 import { ROUTE_NAMES } from './routes';
 
+import Popular from '../../../json-models/dishes/pizza/data.json';
+
 const Container = styled(View)`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.white};
@@ -99,36 +101,14 @@ class Home extends Component<Props, State> {
           />
         }
       >
-        {hasInYourCityEvents && (
-          <Section
-            nextRoute={ROUTE_NAMES.SEE_ALL_EVENTS}
-            title="In Your City"
-          >
-            <InYourCitySection
-              events={inYourCityEvents}
-            />
-          </Section>
-        )}
-        {hasYouMightLikeDishes && (
-          <Section
-            nextRoute={ROUTE_NAMES.YOU_MIGHT_LIKE_SEE_ALL}
-            title="You Might Like"
-          >
-            <YouMightLikeSection
-              dishes={youMightLikeDishes}
-            />
-          </Section>
-        )}
-        {hasPopularDishes && (
-          <Section
-            nextRoute={ROUTE_NAMES.POPULAR_SEE_ALL}
-            title="Popular"
-          >
-            <PopularSection
-              dishes={popularDishes}
-            />
-          </Section>
-        )}
+        <Section
+          nextRoute={ROUTE_NAMES.POPULAR_SEE_ALL}
+          title="Popular"
+        >
+          <PopularSection
+            dishes={Popular}
+          />
+        </Section>
       </ScrollView>
     );
   };
@@ -140,10 +120,8 @@ class Home extends Component<Props, State> {
     return (
       <Container>
         {loading && <Loading />}
-        {error && <Alert
-          type={TYPES.ERROR_SERVER_CONNECTION}
-        />}
-        {!loading && !error && this.renderMainContent(data)}
+
+        {!loading && this.renderMainContent(data)}
       </Container>
     );
   }

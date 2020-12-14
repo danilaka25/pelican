@@ -13,6 +13,8 @@ import appStyles from '~/styles';
 import RestaurantsList from './restaurants-list';
 import Map from './map';
 
+import restaurantsList from '../../../../json-models/restaurants.json';
+
 const Container = styled(View)`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.white};
@@ -31,7 +33,7 @@ const CustomTabWrapper = styled(View)`
 type Props = {
   turnOffMoveRestaurantList: Function,
   shouldMoveRestaurantList: boolean,
-  dishesTypesItems: Array<Object>,
+
   indexRestaurantSelected: number,
   onDishesTypeChange: Function,
   restaurants: Array<Object>,
@@ -46,7 +48,7 @@ const NearYou = ({
   shouldMoveRestaurantList,
   indexRestaurantSelected,
   onDishesTypeChange,
-  dishesTypesItems,
+
   onSelectMarker,
   userLocation,
   hasSomeData,
@@ -54,11 +56,7 @@ const NearYou = ({
   error,
 }: Props): Object => (
   <Container>
-    {!hasSomeData && !error && <Loading />}
-    {error && <Alert
-      type={TYPES.ERROR_SERVER_CONNECTION}
-    />}
-    {!error && hasSomeData && (
+    {hasSomeData && (
       <Fragment>
         <ContentContainer>
           <Map
@@ -67,7 +65,7 @@ const NearYou = ({
             userLocation={userLocation}
             restaurants={restaurants}
           />
-          {restaurants.length > 0 && (
+          {restaurantsList.length > 0 && (
             <RestaurantsList
               turnOffMoveRestaurantList={turnOffMoveRestaurantList}
               shouldMoveRestaurantList={shouldMoveRestaurantList}
@@ -77,14 +75,6 @@ const NearYou = ({
             />
           )}
         </ContentContainer>
-        <CustomTabWrapper>
-          <CustomTab
-            onChangeMenuIndex={index => onDishesTypeChange(index)}
-            contentWidth={appStyles.metrics.width}
-            data={dishesTypesItems}
-            theme="red"
-          />
-        </CustomTabWrapper>
       </Fragment>
     )}
   </Container>

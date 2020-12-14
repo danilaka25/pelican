@@ -161,7 +161,7 @@ class Login extends Component {
         {isBackgroundImageLoaded && (
           <Wrapper>
             <TitleWrapper>
-              <Title>Bon Appetit!</Title>
+              <Title>Pelican Caffe!</Title>
             </TitleWrapper>
             <NavigationTitleWrapper>
               <TouchableOpacity
